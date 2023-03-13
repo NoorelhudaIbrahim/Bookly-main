@@ -10,7 +10,7 @@ require "conn.php";
 
     // try {
         // $sql = "SELECT * FROM `users` WHERE email = $email AND password=$password";
-        $stmt = $conn->prepare("SELECT * FROM users WHERE email = :email AND password = :password");
+        $stmt = $pdo->prepare("SELECT * FROM users WHERE email = :email AND password = :password");
         $stmt->bindParam(':email', $email);
         $stmt->bindParam(':password', $password);
         $stmt->execute();

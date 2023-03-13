@@ -9,7 +9,7 @@ $dbname = "bookly";
 
 $dsn ="mysql:host=$dbsn;dbname=$dbname";
 
-$conn = new PDO($dsn,$dbun,$password);
+$pdo = new PDO($dsn,$dbun,$password);
 
 
 ?>
