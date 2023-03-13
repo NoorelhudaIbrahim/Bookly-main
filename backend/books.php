@@ -7,15 +7,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = $_REQUEST['title'];
     $author = $_REQUEST['author'];
     $description = $_REQUEST['description'];
-    $cover_image = $_REQUEST['cover_image'];
+    // $cover_image = $_REQUEST['cover_image'];
     $user_id = $_REQUEST['user_id'];
 
-    $stmt = $pdo->prepare("INSERT INTO books (title, author, description, cover_image, user_id) VALUES (?, ?, ?, ?, ?)");
-    $stmt->execute([$title, $author, $description, $cover_image, $user_id]);
+    // $stmt = $pdo->prepare("INSERT INTO books (title, author, description, cover_image, user_id) VALUES (?, ?, ?, ?, ?)");
+    // $stmt->execute([$title, $author, $description, $cover_image, $user_id]);
 
     // header("Location: /books.php");
-}
+// }
+ // Handle image file
+ $cover_image = $_FILES['cover_image']['name'];
+ $temp_name = $_FILES['cover_image']['tmp_name'];
+ $upload_dir = 'uploads/'; // Create a directory named uploads to store images
+ move_uploaded_file($temp_name, $upload_dir . $cover_image);
 
+ $stmt = $pdo->prepare("INSERT INTO books (title, author, description, cover_image, user_id) VALUES (?, ?, ?, ?, ?)");
+ $stmt->execute([$title, $author, $description, $cover_image, $user_id]);
+
+ // header("Location: /books.php");
+}
 // Read
 if ($_SERVER['REQUEST_METHOD'] === 'GET'){
 $stmt = $pdo->query("SELECT * FROM books");

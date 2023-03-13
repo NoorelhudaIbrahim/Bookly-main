@@ -1,14 +1,57 @@
-import React from 'react'
+// import React from 'react'
+// import React from 'react';
+// import AddBookForm from '../../components/AddBookForm';
+// import BookList from '../../components/BookList';
 import Footer from '../../components/Footer/Footer'
 import './Home.css'
 import './Slider.css'
 import './SliderThem.css'
+import React, { useState, useEffect } from "react";
+import {Container, Navbar, Nav } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import {useDispatch} from 'react-redux'
 
-// import React from 'react';
-// import AddBookForm from '../../components/AddBookForm';
-// import BookList from '../../components/BookList';
+  // const dispatch=useDispatch();
 
 export default function Home() {
+  const [books, setBooks] = useState([]);
+  const [search, setSearch] = useState("");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    getBooks();
+  }, []);
+ 
+  function getBooks() {
+    axios.get(`http://localhost/Bookly-main/backend/books.php`).then((response) => {
+        setBooks(response.data);
+      })
+  }
+  
+  const deleteBook = (id) => {
+    axios.delete(`http://localhost/Bookly-main/backend/books.php/${id}/delete`).then((response)=>{
+      navigate('/home')
+    })
+  }
+
+  // function getSearch(e) {
+  //   e.preventDefault();
+  //   axios.get(`http://localhost/Bookly-main/backend/search.php/${search}`).then((response)=>{
+
+  //       setBooks(response.data)
+      
+  //   })
+    
+  // }
+
+  // const handleSearch = (e) => {
+  //     const value = e.target.value;
+  //     setSearch(value)
+  // }
+
+  
   return (
     <>
 <div className="home-container">
@@ -18,21 +61,22 @@ export default function Home() {
       You are in the right place. Tell us what titles or genres you have enjoyed
       in the past, and we will give you surprisingly insightful recommendations.
     </p>
-    <a href="/shelf">
-      <button type="button" className="find-books-mobile-btn">
+    {/* <a href="/shelf">
+      <button type="button"className="find-books-desktop-btn botn" >
         Find Books
       </button>
-    </a>
+    </a> */}
   </div>
   <div className="top-rated-books-container ">
     <div className="top-rated-books-header-container">
-      <h1 className="top-rated-books-heading ">Top Rated Books</h1>
+      <h1 className="top-rated-books-heading "> All Books</h1>
       <a href="/AddBookForm">
         <button type="button" className="find-books-desktop-btn botn">
           Add Books
         </button>
       </a>
     </div>
+    
     <div className="slick-container">
       <div className="slick-slider slick-initialized" dir="ltr">
         <button
@@ -337,10 +381,4 @@ export default function Home() {
 
 
 
-  //   <div>
-  //     <AddBookForm />
-  //     <BookList />
-  // </div>
-  // );
 }
-
