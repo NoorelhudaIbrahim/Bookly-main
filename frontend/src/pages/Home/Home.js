@@ -4,6 +4,10 @@ import './Home.css'
 import './Slider.css'
 import './SliderThem.css'
 
+// import React from 'react';
+// import AddBookForm from '../../components/AddBookForm';
+// import BookList from '../../components/BookList';
+
 export default function Home() {
   return (
     <>
@@ -23,7 +27,7 @@ export default function Home() {
   <div className="top-rated-books-container ">
     <div className="top-rated-books-header-container">
       <h1 className="top-rated-books-heading ">Top Rated Books</h1>
-      <a href="/shelf">
+      <a href="/AddBookForm">
         <button type="button" className="find-books-desktop-btn botn">
           Add Books
         </button>
@@ -329,5 +333,14 @@ export default function Home() {
 </div>
 
     </>
-  )
+  );
+
+
+
+  //   <div>
+  //     <AddBookForm />
+  //     <BookList />
+  // </div>
+  // );
 }
+

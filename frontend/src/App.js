@@ -1,5 +1,7 @@
 import Signup from './Register';
 import Login from "./Login";
+import CreateBook from "./pages/AddBook/AddBookForm";
+
 import { Provider } from 'react-redux';
 import store from './store';
 import React from 'react'
@@ -25,6 +27,8 @@ function App() {
         <Route path="/profile" element={<MyProfile />}/>
         <Route path="/login" element={<Login />}/>
         <Route path="/register" element={<Signup />}/>
+        <Route path="/AddBookForm" element={<CreateBook />}/>
+
         {/* <Route path="/user" element={<Users />}/> */}
         <Route path="/home" element={<Home/>}></Route>
         </Routes>
