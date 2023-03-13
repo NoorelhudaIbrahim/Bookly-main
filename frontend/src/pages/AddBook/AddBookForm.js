@@ -32,7 +32,7 @@ const handleSubmit = async (e) => {
         formData
       );
       console.log(response.data);
-      navigate('/book');
+      navigate('/home');
     } catch (error) {
       console.error(error);
     }

@@ -1,6 +1,7 @@
 import Signup from './Register';
 import Login from "./Login";
 import CreateBook from "./pages/AddBook/AddBookForm";
+// import Header from '../../pages/Home/Home'
 
 import { Provider } from 'react-redux';
 import store from './store';
@@ -8,7 +9,7 @@ import React from 'react'
 import './App.css'
 // import Footer from './components/Footer/Footer'
 // import Header from './components/Header/Header'
-import ProfilePicture from './components/ProfilePicture/ProfilePicture'
+// import ProfilePicture from './components/ProfilePicture/ProfilePicture'
 import Home from './pages/Home/Home'
 import MyProfile from './pages/MyProfile/MyProfile'
 

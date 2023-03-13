@@ -27,9 +27,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
  // header("Location: /books.php");
 }
 // Read
-if ($_SERVER['REQUEST_METHOD'] === 'GET'){
-$stmt = $pdo->query("SELECT * FROM books");
-$books = $stmt->fetchAll(PDO::FETCH_ASSOC);}
+
+// if ($_SERVER['REQUEST_METHOD'] === 'GET'){
+// $stmt = $pdo->query("SELECT * FROM books");
+// $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
+// }
+if ($_SERVER["REQUEST_METHOD"] === "GET") {
+    $sql = "SELECT * FROM books ";
+    $query = $pdo->prepare($sql);
+    $query->execute();
+    $users = $query->fetchAll(PDO::FETCH_ASSOC);
+    // print_r($users);
+        // echo json_encode($users);
+  } 
 
 // Update
 if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
