@@ -3,7 +3,8 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { emailORUsername, login, password } from "./actions";
 import "./Relo.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Link  } from "react-router-dom";
+
 
 // Define the Login component
 function Login() {
@@ -52,9 +53,9 @@ function Login() {
           </form>
           <p className="small fw-bold mt-2 pt-1 mb-0">
             Don't have an account?{" "}
-            <a href="./Home.js" className="link-danger">
-              Register
-            </a>
+            {/* <a href="./Home.js" className="link-danger"> */}
+            <Link to="/register">Register</Link>
+            {/* </a> */}
           </p>
         </div>
         <div className="screen__background">

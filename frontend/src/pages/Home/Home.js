@@ -2,6 +2,7 @@
 // import React from 'react';
 // import AddBookForm from '../../components/AddBookForm';
 // import BookList from '../../components/BookList';
+import Header from '../../pages/Home/Home'
 import Footer from '../../components/Footer/Footer'
 import './Home.css'
 import './Slider.css'
@@ -54,6 +55,7 @@ export default function Home() {
   
   return (
     <>
+    <Header />
 <div className="home-container">
   <div className="home-content">
     <h1 className="home-heading ">Find Your Next Favorite Books?</h1>
@@ -76,14 +78,14 @@ export default function Home() {
         </button>
       </a>
     </div>
-    
+
     <div className="slick-container">
       <div className="slick-slider slick-initialized" dir="ltr">
         <button
           type="button"
           data-role="none"
           className="slick-arrow slick-prev"
-          style={{ display: "block" }}
+          style={{ display: "block" , backgroundColor: "black" }}
         >
           {" "}
           Previous

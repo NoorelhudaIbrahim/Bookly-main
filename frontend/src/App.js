@@ -7,7 +7,7 @@ import store from './store';
 import React from 'react'
 import './App.css'
 // import Footer from './components/Footer/Footer'
-import Header from './components/Header/Header'
+// import Header from './components/Header/Header'
 import ProfilePicture from './components/ProfilePicture/ProfilePicture'
 import Home from './pages/Home/Home'
 import MyProfile from './pages/MyProfile/MyProfile'
@@ -22,10 +22,10 @@ function App() {
     <BrowserRouter>
     <>
     <Provider store={store}>
-<Header />
+{/* <Header /> */}
       <Routes>
         <Route path="/profile" element={<MyProfile />}/>
-        <Route path="/login" element={<Login />}/>
+        <Route path="/" element={<Login />}/>
         <Route path="/register" element={<Signup />}/>
         <Route path="/AddBookForm" element={<CreateBook />}/>
 

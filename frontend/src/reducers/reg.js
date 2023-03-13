@@ -47,7 +47,7 @@ const registerReducer=(state={nameError:'',emailError:'',passError:'',confirmPas
             if(state.nameError == null && state.emailError == null && state.passError == null && state.confirmPassError == null) {
 
                 axios.post('http://localhost/Bookly-main/backend/reg.php?name='+state.name+'&email='+state.email+'&password='+state.password)
-                window.location.href = "/Login";
+                window.location.href = "/";
              console.log('here');
             }else{
                 return console.log('error');
