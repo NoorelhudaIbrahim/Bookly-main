@@ -21,7 +21,8 @@ export default function Home() {
   function getBooks() {
     axios.get(`http://localhost/Bookly-main/backend/books.php`)
       .then((response) => {
-        setBooks([response.data]);
+        setBooks(response.data);
+        // console.log(books,'books');
       })
       .catch((error) => {
         console.log(error);
