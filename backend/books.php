@@ -3,33 +3,88 @@
 require_once 'conn.php';
 
 // Create
+// if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+//     $title = $_REQUEST['title'];
+//     $author = $_REQUEST['author'];
+//     $description = $_REQUEST['description'];
+//     // $cover_image = $_REQUEST['cover_image'];
+//     $user_id = $_REQUEST['user_id'];
+//     $file = $_FILES["cover_image"];
+
+
+
+//     $targetDir = "../src/images/";
+//     $fileName = basename($file["name"]);
+//     $targetPath = $targetDir . $fileName;
+  
+//     if (move_uploaded_file($file["tmp_name"], $targetPath)) {
+//       echo "File uploaded successfully";
+//         $sql = "INSERT INTO books (title ,author, description , cover_image , user_id)
+//                 VALUES ( ? , ? , ? , ? , ?)" ;
+//         $query = $pdo->prepare($sql);
+//         $query->execute([ $title , $author , $description , $cover_image ,$fileName]);
+//     } else {
+//       echo "Error uploading file";
+//     }
+
+
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $title = $_REQUEST['title'];
-    $author = $_REQUEST['author'];
-    $description = $_REQUEST['description'];
-    // $cover_image = $_REQUEST['cover_image'];
-    $user_id = $_REQUEST['user_id'];
+    $title = $_POST['title'];
+    $author = $_POST['author'];
+    $description = $_POST['description'];
+    $user_id = $_POST['user_id'];
+    $file = $_FILES["cover_image"];
 
-    // $stmt = $pdo->prepare("INSERT INTO books (title, author, description, cover_image, user_id) VALUES (?, ?, ?, ?, ?)");
-    // $stmt->execute([$title, $author, $description, $cover_image, $user_id]);
+    // Validate that the uploaded file is an image
+    $fileType = exif_imagetype($file["tmp_name"]);
+    if ($fileType === false) {
+        echo "Error: File is not an image.";
+        exit;
+    }
 
-    // header("Location: /books.php");
+    $targetDir = "../src/images/";
+    $fileName = basename($file["name"]);
+    $targetPath = $targetDir . $fileName;
+  
+    if (move_uploaded_file($file["tmp_name"], $targetPath)) {
+        echo "File uploaded successfully";
+        $sql = "INSERT INTO books (title ,author, description , cover_image , user_id)
+                VALUES ( ? , ? , ? , ? , ?)" ;
+        $query = $pdo->prepare($sql);
+        $query->execute([ $title , $author , $description , $fileName ,$user_id]);
+    } else {
+        echo "Error uploading file";
+    }
+}
+
 // }
  // Handle image file
- $cover_image = $_FILES['cover_image']['name'];
- $temp_name = $_FILES['cover_image']['tmp_name'];
- $upload_dir = 'uploads/'; // Create a directory named uploads to store images
- move_uploaded_file($temp_name, $upload_dir . $cover_image);
+//  $cover_image = $_FILES['cover_image']['name'];
+//  $temp_name = $_FILES['cover_image']['tmp_name'];
 
- $stmt = $pdo->prepare("INSERT INTO books (title, author, description, cover_image, user_id) VALUES (?, ?, ?, ?, ?)");
- $stmt->execute([$title, $author, $description, $cover_image, $user_id]);
+//  $upload_dir = 'uploads/'; // Create a directory named uploads to store images
+//  move_uploaded_file($temp_name, $upload_dir . $cover_image);
+
+//  $stmt = $pdo->prepare("INSERT INTO books (title, author, description, cover_image, user_id) VALUES (?, ?, ?, ?, ?)");
+//  $stmt->execute([$title, $author, $description, $cover_image, $user_id]);
 
  // header("Location: /books.php");
-}
+// }
 // Read
-if ($_SERVER['REQUEST_METHOD'] === 'GET'){
-$stmt = $pdo->query("SELECT * FROM books");
-$books = $stmt->fetchAll(PDO::FETCH_ASSOC);}
+
+// if ($_SERVER['REQUEST_METHOD'] === 'GET'){
+// $stmt = $pdo->query("SELECT * FROM books");
+// $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
+// }
+if ($_SERVER["REQUEST_METHOD"] === "GET") {
+    $sql = "SELECT * FROM books";
+    $query = $pdo->prepare($sql);
+    $query->execute();
+    $books = $query->fetchAll(PDO::FETCH_ASSOC);
+    // print_r($users);
+        echo json_encode($books);
+  } 
 
 // Update
 if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
